@@ -6,6 +6,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 /**
  * Created with IntelliJ IDEA.
@@ -39,4 +40,19 @@ public class ServletAndFilterConfig {
         registration.addUrlPatterns("/*");//过滤路径
         return registration;
     }
+
+    /*
+      等价于web.xml配置CharacterEncodingFilter
+      使用传统的Spring提供给的字符编码过滤器：CharacterEncodingFilter
+     */
+    /*@Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setForceEncoding(true);
+        characterEncodingFilter.setEncoding("UTF-8");
+        registrationBean.setFilter(characterEncodingFilter);
+        registrationBean.addUrlPatterns("/*");//过滤所有请求
+        return registrationBean;
+    }*/
 }

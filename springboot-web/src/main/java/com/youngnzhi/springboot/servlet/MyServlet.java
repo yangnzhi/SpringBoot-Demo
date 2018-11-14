@@ -18,7 +18,7 @@ import java.io.IOException;
 public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print("my servlet");
+        resp.getWriter().print("--测试编码过滤器--");
         resp.getWriter().flush();
         resp.getWriter().close();
     }
