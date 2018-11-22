@@ -35,5 +35,25 @@
     <span th:text="*{email}">邮件</span><br/>
     <span th:text="${user.sex}">性别</span><br/>
 </p>
+
+---------绝对URL1---------
+<p>
+    <a href="index.html" th:href="@{'http://localhost:8080/boot/user?name='+${user.name}+'&sex='+${user.sex}}">查看</a>
+</p>
+
+---------绝对URL2---------
+<p>
+    <a href="index.html" th:href="@{|http://localhost:8080/boot/user?name=${user.name}&sex=${user.sex}|}">查看</a>
+</p>
+
+---------相对URL，相对于页面---------
+<p>
+    <a href="index.html" th:href="@{'boot/user?name='+${user.name}+'&sex='+${user.sex}}">查看</a>
+</p>
+
+---------相对URL，相对于项目上下文,项目的上下文名会被自动添加---------
+<p>
+    <a href="index.html" th:href="@{'/boot/user?name='+${user.name}+'&sex='+${user.sex}}">查看</a>
+</p>
 </body>
 </html>
