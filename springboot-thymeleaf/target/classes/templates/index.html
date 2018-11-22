@@ -1,0 +1,39 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Thymeleaf</title>
+</head>
+<body>
+---------标准变量表达式---------
+<p>
+    <span th:text="${user.name}">姓名</span><br/>
+    <span th:text="${user.address}">住址</span><br/>
+    <span th:text="${user.email}">邮件</span><br/>
+    <span th:text="${user.sex}">性别</span><br/>
+</p>
+
+---------选择变量表达式1---------
+<p th:object="${user}"> <!--th:object 绑定上下文传过来的model-->
+    <span th:text="*{name}">姓名</span><br/>
+    <span th:text="*{address}">住址</span><br/>
+    <span th:text="*{email}">邮件</span><br/>
+    <span th:text="*{sex}">性别</span><br/>
+</p>
+
+---------选择变量表达式2---------
+<p>
+    <span th:text="*{user.name}">姓名</span><br/>
+    <span th:text="*{user.address}">住址</span><br/>
+    <span th:text="*{user.email}">邮件</span><br/>
+    <span th:text="*{user.sex}">性别</span><br/>
+</p>
+
+---------标准变量表达式和选择变量表达式混合使用---------
+<p th:object="${user}">
+    <span th:text="*{name}">姓名</span><br/>
+    <span th:text="${user.address}">住址</span><br/>
+    <span th:text="*{email}">邮件</span><br/>
+    <span th:text="${user.sex}">性别</span><br/>
+</p>
+</body>
+</html>
