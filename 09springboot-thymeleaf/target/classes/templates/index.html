@@ -51,9 +51,47 @@
     <a href="index.html" th:href="@{'boot/user?name='+${user.name}+'&sex='+${user.sex}}">查看</a>
 </p>
 
----------相对URL，相对于项目上下文,项目的上下文名会被自动添加---------
+---------相对URL，相对于项目上下文,'/'标识项目的上下文，项目的上下文会被自动添加---------
 <p>
     <a href="index.html" th:href="@{'/boot/user?name='+${user.name}+'&sex='+${user.sex}}">查看</a>
 </p>
+
+---------表单 th:action---------
+<form id="testform" th:action="@{'/boot/thymeleaf?name='+${user.name}}">动态action</form>
+
+<form id="testform2" action="/boot/thymeleaf">静态action</form>
+
+
+---------th:each 遍历List---------
+<p th:each="user : ${userList}">
+    索引：<span th:text="${userStat.index}"></span>&nbsp;
+    当前迭代个数：<span th:text="${userStat.count}"></span>&nbsp;
+    <span th:text="${user.name}">姓名</span><br/>
+    <span th:text="${user.address}">住址</span><br/>
+    <span th:text="${user.email}">邮件</span><br/>
+    <span th:text="${user.sex}">性别</span><br/>
+</p>
+
+---------th:each 遍历Map---------
+<p th:each="user : ${userMap}">
+    key:<span th:text="${user.key}">姓名</span><br/>
+    <span th:text="${user.value.name}">姓名</span><br/>
+    <span th:text="${user.value.address}">住址</span><br/>
+    <span th:text="${user.value.email}">邮件</span><br/>
+    <span th:text="${user.value.sex}">性别</span><br/>
+</p>
+
+
+---------th:each 遍历数组---------
+<p th:each="user : ${userArray}">
+    <span th:text="${user.name}">姓名</span><br/>
+    <span th:text="${user.address}">住址</span><br/>
+    <span th:text="${user.email}">邮件</span><br/>
+    <span th:text="${user.sex}">性别</span><br/>
+</p>
+
+
 </body>
 </html>
+
+
