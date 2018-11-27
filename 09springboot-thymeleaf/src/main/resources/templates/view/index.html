@@ -1,0 +1,272 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Thymeleaf</title>
+</head>
+<body>
+========================================Thymeleaf 标准表达式========================================
+<br/>
+
+---------标准变量表达式---------
+<p>
+    <span th:text="${user.name}">姓名</span><br/>
+    <span th:text="${user.address}">住址</span><br/>
+    <span th:text="${user.email}">邮件</span><br/>
+    <span th:text="${user.sex}">性别</span><br/>
+</p>
+
+---------选择变量表达式1---------
+<p th:object="${user}"> <!--th:object 绑定上下文传过来的model-->
+    <span th:text="*{name}">姓名</span><br/>
+    <span th:text="*{address}">住址</span><br/>
+    <span th:text="*{email}">邮件</span><br/>
+    <span th:text="*{sex}">性别</span><br/>
+</p>
+
+---------选择变量表达式2---------
+<p>
+    <span th:text="*{user.name}">姓名</span><br/>
+    <span th:text="*{user.address}">住址</span><br/>
+    <span th:text="*{user.email}">邮件</span><br/>
+    <span th:text="*{user.sex}">性别</span><br/>
+</p>
+
+---------标准变量表达式和选择变量表达式混合使用---------
+<p th:object="${user}">
+    <span th:text="*{name}">姓名</span><br/>
+    <span th:text="${user.address}">住址</span><br/>
+    <span th:text="*{email}">邮件</span><br/>
+    <span th:text="${user.sex}">性别</span><br/>
+</p>
+
+========================================Thymeleaf 的常见属性========================================
+<br/>
+
+---------绝对URL1---------
+<p>
+    <a href="index.html" th:href="@{'http://localhost:8080/boot/user?name='+${user.name}+'&sex='+${user.sex}}">查看</a>
+</p>
+
+---------绝对URL2---------
+<p>
+    <a href="index.html" th:href="@{|http://localhost:8080/boot/user?name=${user.name}&sex=${user.sex}|}">查看</a>
+</p>
+
+---------相对URL，相对于页面---------
+<p>
+    <a href="index.html" th:href="@{'boot/user?name='+${user.name}+'&sex='+${user.sex}}">查看</a>
+</p>
+
+---------相对URL，相对于项目上下文,'/'标识项目的上下文，项目的上下文会被自动添加---------
+<p>
+    <a href="index.html" th:href="@{'/boot/user?name='+${user.name}+'&sex='+${user.sex}}">查看</a>
+</p>
+
+---------表单 th:action---------
+<form id="testform" th:action="@{'/boot/thymeleaf?name='+${user.name}}">动态action</form>
+
+<form id="testform2" action="/boot/thymeleaf">静态action</form>
+
+---------th:each 遍历List---------
+<p th:each="user : ${userList}">
+    索引：<span th:text="${userStat.index}"></span>&nbsp;
+    当前迭代个数：<span th:text="${userStat.count}"></span>&nbsp;
+    <span th:text="${user.name}">姓名</span><br/>
+    <span th:text="${user.address}">住址</span><br/>
+    <span th:text="${user.email}">邮件</span><br/>
+    <span th:text="${user.sex}">性别</span><br/>
+</p>
+
+---------th:each 遍历Map---------
+<p th:each="user : ${userMap}">
+    key:<span th:text="${user.key}">姓名</span><br/>
+    <span th:text="${user.value.name}">姓名</span><br/>
+    <span th:text="${user.value.address}">住址</span><br/>
+    <span th:text="${user.value.email}">邮件</span><br/>
+    <span th:text="${user.value.sex}">性别</span><br/>
+</p>
+
+---------th:each 遍历数组---------
+<p th:each="user : ${userArray}">
+    <span th:text="${user.name}">姓名</span><br/>
+    <span th:text="${user.address}">住址</span><br/>
+    <span th:text="${user.email}">邮件</span><br/>
+    <span th:text="${user.sex}">性别</span><br/>
+</p>
+
+---------th:href 定义超链接---------
+<p>
+<a href="www.baidu.com">静态</a> <br/>
+<a th:href="@{|/login?name=${user.name}|}">静态</a><br/>
+</p>
+
+---------th:id id属性---------
+<p>
+<a id="hhid">静态</a> <br/>
+<a th:id="${user.name}">静态</a><br/>
+</p>
+
+---------th:name name属性---------
+<p>
+<a name="hhname">静态</a> <br/>
+<a th:id="${user.name}" th:name="${user.name}">静态</a><br/>
+</p>
+
+---------th:if if判断---------
+<p>
+    ==判断
+   <span th:if="${user.sex == 'man'}">
+        man
+   </span>
+    <span th:if="${user.sex == 'woman'}">
+        woman
+   </span>
+</p>
+<p>
+    eq判断
+    <span th:if="${user.sex eq 'man'}">
+        man
+   </span>
+    <span th:if="${user.sex eq 'woman'}">
+        woman
+   </span>
+</p>
+
+---------th:unless unless判断与if相反---------
+<p>
+    ==判断
+    <span th:unless="${user.sex == 'man'}">
+        man
+   </span>
+    <span th:unless="${user.sex == 'woman'}">
+        woman
+   </span>
+</p>
+<p>
+    eq判断
+    <span th:unless="${user.sex eq 'man'}">
+        man
+   </span>
+    <span th:unless="${user.sex eq 'woman'}">
+        woman
+   </span>
+</p>
+
+---------th:switch/th:case 判断---------
+<p th:switch="${user.sex}">
+    <span th:case="man">man</span>
+    <span th:case="woman">woman</span>
+    <span th:case="*">other</span>
+    <!--
+    一旦某个case判断值为true，剩余的case则都当做false，
+    “*”表示默认的case，前面的case都不匹配时候，执行默认的case
+   -->
+</p>
+
+---------th:src 外部资源引入---------
+<p>
+    <img th:src="@{/image/test.jpg}" />
+    <script th:src="@{/js/test.js}"/>
+</p>
+
+---------th:text 文本显示---------
+<p>
+    <span th:text="${user.sex}"></span>
+    <input type="text" th:text="${user.sex}" />
+</p>
+
+---------th:value 赋值---------
+<p>
+    <input type="text" th:value="${user.sex}" />
+</p>
+
+---------th:attr 设置属性---------
+<p>
+    <input type="text" th:attr="value=${user.sex}" />
+    <span th:text="${user.sex}" th:attr="data-id='8'"/>
+</p>
+
+---------th:onclick 点击事件---------
+<p>
+    <input type="text" th:value="${user.sex}" th:onclick="'getAlert()'" />
+</p>
+
+---------th:attr 设置属性---------
+<p>
+    <span th:text="${user.sex}" th:attr="data-id='8'" th:style="'color: blue'" />
+</p>
+
+---------th:method form提交方式---------
+<form th:method="post"></form> <br/>
+
+---------th:inline 内联文本---------
+<span th:inline="text">hello,[[${user.name}]]</span><br/>
+等于<br/>
+<span>hello,<span th:text="${user.name}"></span></span><br/>
+
+---------th:inline 内联脚本---------
+<script th:inline="javascript" type="text/javascript">
+    var user = [[${user.name}]];
+    alert(user);
+</script>
+<script th:inline="javascript" type="text/javascript">
+    var msg  = "Hello," + [[${user.name}]];
+    alert(msg);
+</script>
+<br/>
+========================================Thymeleaf 字面量========================================
+<br/>
+
+---------文字字面量---------
+<p>
+    <a th:href="@{'api/getUser?id=' + ${user.name}}">修改</a>
+    <a th:href="@{|api/getUser?id=${user.name}|}">修改</a>
+</p>
+
+---------数字字面量---------
+<p>
+    今年是<span th:text="2018">2011</span>年
+    20年后是<span th:text="2018 + 20">2011</span>年
+</p>
+
+---------Boolean字面量---------
+<p th:if="${isFlag == true}">
+    execute
+</p>
+
+---------null字面量---------
+<p th:if="${userList eq null}">
+    为空
+</p>
+<p th:if="${userList ne null}">
+    不为空
+</p>
+
+========================================Thymeleaf 字符串拼接========================================
+<br/>
+<p>
+    <span th:text="'当前第'+${curentPage}+'页,共'+${totalPage}+'页'"></span>
+
+    <span th:text="|当前第${curentPage}页,共${totalPage}页|"></span>
+</p>
+
+========================================Thymeleaf 三元运算判断========================================
+<br/>
+<p>
+    <span th:text="${user.sex eq 'man'}?'男':'女'"></span>
+</p>
+
+========================================Thymeleaf 运算和关系判断========================================
+<br/>
+
+
+
+<script>
+    function getAlert() {
+        alert("haha");
+    }
+</script>
+</body>
+</html>
+
+

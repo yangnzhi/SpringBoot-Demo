@@ -39,11 +39,16 @@ public class ThymeleafController {
             userMap.put("user"+i,u);
             userArray[i] = u;
         }
+        boolean isFlag = true;
 
         model.addAttribute("user",user);
         model.addAttribute("userList",userList);
         model.addAttribute("userMap",userMap);
         model.addAttribute("userArray",userArray);
-        return "index";
+        model.addAttribute("isFlag",isFlag);
+        model.addAttribute("curentPage",1);
+        model.addAttribute("totalPage",3);
+
+        return "view/index";
     }
 }
