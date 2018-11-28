@@ -6,10 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.thymeleaf.expression.Lists;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * Created by youngnzhi on 2018/11/22.
@@ -18,7 +16,7 @@ import java.util.Map;
 public class ThymeleafController {
 
     @RequestMapping("/boot/thymeleaf")
-    private String testThymeleaf(Model model) {
+    private String testThymeleaf(Model model, HttpServletRequest request) {
         User user = new User();
         user.setName("kevin");
         user.setAddress("chengdu");
@@ -48,6 +46,10 @@ public class ThymeleafController {
         model.addAttribute("isFlag",isFlag);
         model.addAttribute("curentPage",1);
         model.addAttribute("totalPage",3);
+        model.addAttribute("curentDate",new Date());
+
+        request.setAttribute("username","kobe");
+        request.getSession().setAttribute("username2","durant");
 
         return "view/index";
     }

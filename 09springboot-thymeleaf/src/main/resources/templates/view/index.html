@@ -259,7 +259,37 @@
 ========================================Thymeleaf 运算和关系判断========================================
 <br/>
 
+========================================Thymeleaf 基本内置对象========================================
+<br/>
+<p>
+    #request:<br/>
+    <span th:text="${#request.getAttribute('username')}"></span><br/>
+    <span th:text="${#request.getContextPath()}"></span><br/>
+    <span th:inline="text">
+        [[${#request.getAttribute("username")}]]
+    </span><br/>
 
+    #session:<br/>
+    <span th:text="${#session.getAttribute('username2')}"></span><br/>
+    <span th:text="${#session.getId()}"></span><br/>
+    <span th:text="${#session.getLastAccessedTime()}"></span><br/>
+</p>
+
+========================================Thymeleaf 功能性内置对象========================================
+<br/>
+<p>
+    #dates:<br/>
+    <span th:text="${#dates.format(curentDate,'yyyy-MM-dd HH:mm:ss')}"></span><br/>
+
+    #calendars:<br/>
+    <span th:text="${#calendars.createNow()}"></span><br/>
+
+    #strings:<br/>
+    <span th:text="${#strings.substring(#dates.format(curentDate,'yyyy-MM-dd HH:mm:ss'),0,10)}"></span><br/>
+
+    #lists:<br/>
+    <span th:text="${#lists.size(userList)}"></span><br/>
+</p>
 
 <script>
     function getAlert() {
