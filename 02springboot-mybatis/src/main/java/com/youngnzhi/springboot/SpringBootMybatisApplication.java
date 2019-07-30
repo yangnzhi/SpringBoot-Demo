@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.youngnzhi.springboot.mapper")
+@MapperScan(basePackages = "com.youngnzhi.springboot.mapper.*")
 @EnableTransactionManagement //开启springboot事务支持
-public class Application {
+public class SpringBootMybatisApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class,args);
+        SpringApplication.run(SpringBootMybatisApplication.class,args);
     }
 }
